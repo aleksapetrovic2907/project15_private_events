@@ -1,22 +1,32 @@
 <h2 class="my-5">User Info</h2>
 <table class="table table-borderless" style="table-layout: fixed;">
-    <tr>
-        <th>Name</th>
-        <th>E-mail</th>
-        <th>Joined on</th>
-    </tr>
-    <tr>
-        <td><%= @user.name %></td>
-        <td><%= @user.email %></td>
-        <td><%= @user.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>E-mail</th>
+    <th>Joined on</th>
+  </tr>
+  <tr>
+    <td><%= @user.name %></td>
+    <td><%= @user.email %></td>
+    <td><%= @user.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
+  </tr>
 </table>
-
 <h2 class="my-5">Users events</h2>
 <% if @user.created_events.any? %>
-    <% @user.created_events.each do |event| %>
-        <%= event %>
-    <% end %>
+<div class="row">
+  <% @user.created_events.each do |event| %>
+    <div class="col-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= event.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= event.location %>, <%= event.date_time.strftime("%d/%m/%Y") %></h6>
+          <p class="card-text"><%= event.description.truncate(40) %></p>
+          <%= link_to 'Learn More', event_path(event), class: "btn btn-outline-primary btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <% else %>
-    <span class="text-muted">There seem to be no events created by this user.</span>
+  <span class="text-muted">There seem to be no events created by this user.</span>
 <% end %>

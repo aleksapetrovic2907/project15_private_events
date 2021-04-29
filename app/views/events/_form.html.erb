@@ -22,10 +22,15 @@
   </div>
 
   <div class="mb-3">
+    <%= f.label :date_time, class:"form-label"%><br />
+    <%= f.datetime_field :date_time, autofocus: true, autocomplete: "date_time", class:"form-control" %>
+  </div>
+
+  <div class="mb-3">
     <%= f.label :location, class:"form-label"%><br />
     <%= f.text_field :location, autofocus: true, autocomplete: "location", class:"form-control" %>
   </div>
-
+  
   <div class="actions">
     <%= f.submit "Create", class:"btn btn-primary" %>
   </div>
