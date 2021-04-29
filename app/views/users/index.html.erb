@@ -1,3 +1,17 @@
-<% @users.each do |user| %>
-    <strong>Name: </strong><%= user.name %>
-<% end %>
+<h2 class="my-5">User Info</h2>
+<table class="table table-borderless" style="table-layout: fixed";>
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Joined on</th>
+        <th>See User</th>
+    </tr>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
+            <td><%= link_to "Show", user, class:"btn btn-outline-primary"%></td>
+        </tr>
+    <% end %>
+</table>

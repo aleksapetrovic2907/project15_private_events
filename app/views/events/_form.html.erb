@@ -1,0 +1,32 @@
+<%= form_with(model: @event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% @event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="mb-3">
+    <%= f.label :title, class:"form-label"%><br />
+    <%= f.text_field :title, autofocus: true, autocomplete: "title", class:"form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description, class:"form-label"%><br />
+    <%= f.text_area :description, autofocus: true, autocomplete: "description", rows:6 ,class:"form-control"%>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :location, class:"form-label"%><br />
+    <%= f.text_field :location, autofocus: true, autocomplete: "location", class:"form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create", class:"btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<h2 class="my-5">User Info</h2>
+<table class="table table-borderless" style="table-layout: fixed;">
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Joined on</th>
+    </tr>
+    <tr>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
+    </tr>
+</table>
+
+<h2 class="my-5">Users events</h2>
+<% if @user.created_events.any? %>
+    <% @user.created_events.each do |event| %>
+        <%= event %>
+    <% end %>
+<% else %>
+    <span class="text-muted">There seem to be no events created by this user.</span>
+<% end %>
