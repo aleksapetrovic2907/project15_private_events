@@ -11,3 +11,23 @@
     <% end %>
   <% end %>
 </div>
+
+<div class="card card-body">
+
+  <h4>Created by <%= @event.creator.name %></h4>
+  <div class="mb-5">
+  <h5 class="text-muted"><%= @event.description %></h5>
+  </div>
+
+  <h4>Where?</h4>
+  <div class="mb-5">
+  <h5 class="text-muted">The event will be held at <%= @event.location %>.</h5>
+  </div>
+
+  <h4>When?</h4>
+  <div>
+  <h5 class="text-muted">The event will be held on <%= @event.date_time.strftime("%d/%m/%Y") %> at <%= @event.date_time.strftime("%H:%M")%></h5>
+  </div>
+
+
+<div>
