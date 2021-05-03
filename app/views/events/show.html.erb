@@ -3,31 +3,49 @@
     <h2><%= @event.title %></h2>
   </div>
   <% if user_signed_in? %>
-    <% if current_user.id == @event.creator_id %>
-      <div class="col">
+    <div class="col">
+      <% if current_user.id == @event.creator_id %>
         <%= link_to "Remove", @event, method: :delete, class:"btn btn-outline-primary float-end mx-2"%>
         <%= link_to "Edit Event", edit_event_path(@event), class:"btn btn-primary float-end"%>
-      </div>
-    <% end %>
+      <% else %>
+        <% if @event.attendees.include?(current_user) %>
+          <%= link_to "Can't Come", cancel_rsvp_event_path, class:"btn btn-primary float-end"%>
+        <% else %>
+          <%= link_to "Attend Event", rsvp_event_path, class:"btn btn-primary float-end"%>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
-
-<div class="card card-body">
-
-  <h4>Created by <%= @event.creator.name %></h4>
-  <div class="mb-5">
-  <h5 class="text-muted"><%= @event.description %></h5>
+<div class="card-body mb-5 row">
+  <div class="col">
+    <h4>Created by <%= @event.creator.name %></h4>
+    <div class="mb-5">
+      <h5 class="text-muted"><%= @event.description %></h5>
+    </div>
+    <h4>Where?</h4>
+    <div class="mb-5">
+      <h5 class="text-muted">The event will be held at <%= @event.location %>.</h5>
+    </div>
+    <h4>When?</h4>
+    <div>
+      <h5 class="text-muted">The event will be held on <%= @event.date_time.strftime("%d/%m/%Y") %> at <%= @event.date_time.strftime("%H:%M")%></h5>
+    </div>
   </div>
-
-  <h4>Where?</h4>
-  <div class="mb-5">
-  <h5 class="text-muted">The event will be held at <%= @event.location %>.</h5>
+  <div class="col">
+    <h5 class="text-muted mb-2"> LIST OF ATTENDEES </h5>
+    <% if @event.attendees.any? %>
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <% @event.attendees.each do |att| %>
+            <%= link_to att, class:"text-decoration-none" do %>
+              <li class="list-group-item "><%= att.name %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <span class="text-muted">There seem to be no attendees for this event.</span>
+    <% end %>
   </div>
-
-  <h4>When?</h4>
-  <div>
-  <h5 class="text-muted">The event will be held on <%= @event.date_time.strftime("%d/%m/%Y") %> at <%= @event.date_time.strftime("%H:%M")%></h5>
-  </div>
-
-
-<div>
+</div>
